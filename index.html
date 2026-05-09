@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>AFL League</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    html, body{
+      max-width:100%;
+      overflow-x:hidden;
+    }
+
+    body{
+      background:#08121d;
+      color:white;
+    }
+
+    /* HEADER */
+
+    header{
+      background:#0b1c2c;
+      padding:18px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:2px solid #19c2ff;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .logo img{
+      width:75px;
+      height:75px;
+      border-radius:50%;
+    }
+
+    .logo h1{
+      font-size:2rem;
+      color:#19c2ff;
+      letter-spacing:2px;
+    }
+
+    /* NAV FIX (kein Overflow mehr) */
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      max-width:100%;
+    }
+
+    nav a{
+      color:white;
+      text-decoration:none;
+      font-weight:bold;
+      padding:6px 10px;
+      border-radius:8px;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      background:#19c2ff22;
+      color:#19c2ff;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:90vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      padding:40px 20px;
+      background:
+      radial-gradient(circle at top,#12324d,#08121d 70%);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:600px;
+      height:600px;
+      background:#19c2ff22;
+      border-radius:50%;
+      filter:blur(100px);
+      animation:glow 6s infinite alternate;
+    }
+
+    @keyframes glow{
+      from{transform:scale(1);}
+      to{transform:scale(1.2);}
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:800px;
+      padding:20px;
+    }
+
+    .hero-content img{
+      width:180px;
+      margin-bottom:25px;
+      animation:float 3s ease-in-out infinite;
+      max-width:100%;
+    }
+
+    @keyframes float{
+      0%{transform:translateY(0px);}
+      50%{transform:translateY(-10px);}
+      100%{transform:translateY(0px);}
+    }
+
+    .hero h2{
+      font-size:4rem;
+      color:#19c2ff;
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      font-size:1.3rem;
+      color:#cbd5e1;
+      margin-bottom:35px;
+    }
+
+    .btn{
+      padding:15px 40px;
+      border:none;
+      border-radius:12px;
+      background:#19c2ff;
+      color:#08121d;
+      font-size:1rem;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 0 20px #19c2ff66;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 0 30px #19c2ff;
+    }
+
+    /* SECTIONS */
+
+    .section{
+      padding:80px 10%;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:2.7rem;
+      color:#19c2ff;
+      margin-bottom:50px;
+    }
+
+    /* CARDS */
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:25px;
+    }
+
+    .card{
+      background:#102235;
+      border:1px solid #19c2ff33;
+      padding:30px;
+      border-radius:18px;
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      border-color:#19c2ff;
+      box-shadow:0 0 20px #19c2ff33;
+    }
+
+    .card h3{
+      color:#19c2ff;
+      margin-bottom:15px;
+      font-size:1.4rem;
+    }
+
+    .card p{
+      color:#cbd5e1;
+      line-height:1.6;
+    }
+
+    /* TABLE */
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:15px;
+      background:#102235;
+    }
+
+    th{
+      background:#19c2ff;
+      color:#08121d;
+      padding:18px;
+    }
+
+    td{
+      padding:18px;
+      text-align:center;
+      border-bottom:1px solid #1e3a52;
+      color:#e2e8f0;
+    }
+
+    tr:hover{
+      background:#16324a;
+    }
+
+    /* CUSTOMS */
+
+    .customs-grid{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .custom-item{
+      width:140px;
+      height:140px;
+      background:#102235;
+      border:1px solid #19c2ff33;
+      border-radius:18px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:10px;
+      transition:0.3s;
+    }
+
+    .custom-item:hover{
+      transform:translateY(-8px);
+      border-color:#19c2ff;
+      box-shadow:0 0 20px #19c2ff33;
+    }
+
+    .custom-item img{
+      width:100px;
+      height:100px;
+      object-fit:contain;
+    }
+
+    /* CONTACT */
+
+    .contact-box{
+      max-width:700px;
+      margin:auto;
+      background:#102235;
+      border:1px solid #19c2ff33;
+      border-radius:18px;
+      padding:35px;
+      text-align:center;
+    }
+
+    .contact-box p{
+      font-size:1.1rem;
+      margin:10px 0;
+      color:#cbd5e1;
+    }
+
+    .contact-box span{
+      color:#19c2ff;
+      font-weight:bold;
+    }
+
+    footer{
+      background:#050d16;
+      text-align:center;
+      padding:30px;
+      color:#94a3b8;
+      border-top:1px solid #19c2ff33;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="logo">
+    <img src="AflLOGO.png" alt="AFL Logo">
+    <h1>AFL LEAGUE</h1>
+  </div>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#teams">Teams</a>
+    <a href="#table">Premtable</a>
+    <a href="#news">News</a>
+    <a href="#customs">Customs</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <img src="AflLOGO.png" alt="AFL Logo">
+    <h2>ATHLETIC FOOTBALL LEAGUE</h2>
+    <p>Upcoming VRFS League with Customs in the Game soon for Rewards!</p>
+    <a class="btn" href="https://discord.gg/8nTgAeB9ZE" target="_blank">Join AFL</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <h2 class="section-title">Contact</h2>
+
+  <div class="contact-box">
+    <p><span>Contact Infos</span></p>
+    <p><span>Discord:</span> capidabest</p>
+    <p><span>League Server:</span> AFL League</p>
+    <p><span>POCs:</span> Glitch & Solar</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 AFL • Athletic Football League</p>
+</footer>
+
+</body>
+</html>
